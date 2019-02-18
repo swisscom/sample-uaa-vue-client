@@ -15,23 +15,3 @@ new Vue({
   router,
   render: h => h(App)
 })
-
-router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  if (requiresAuth) {
-      mgr.getRole().then(
-        sucess => {
-          if (to.meta.role == sucess){
-            next();
-          }else {
-            next('/accessdenied');
-          }
-        },
-        err => {
-          console.log(err);
-        }
-      );    
-  } else {
-    next();
-  }
-});

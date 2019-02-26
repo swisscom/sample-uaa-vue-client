@@ -1,0 +1,21 @@
+---
+applications:
+  - name: sample-uaa-vue-client
+    instances: 1
+    memory: 64M
+    disk_quota: 1G
+    stack: cflinuxfs2
+    command: $HOME/public/start.sh
+    path: dist
+
+    env:
+      SERVER_URL: <resource server URL>
+
+    buildpacks:
+      - staticfile_buildpack
+
+    routes:
+      - route: <provide a route for your app>
+
+    services:
+      - oauth2

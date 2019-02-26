@@ -24,10 +24,10 @@ export default class ApiService {
       })
   }
 
-  async getAll(api){
-    await this.defineHeaderAxios() 
+  async getEnv(){
+    await this.defineAxiosDefaults()
     return axios
-      .get(baseUrl + api)
+      .get('/env')
       .then(response => response.data)
       .catch(err => {
         console.log(err);

@@ -2,19 +2,26 @@
 import axios from 'axios'
 import Mgr from './SecurityService'
 import 'babel-polyfill';
+import ConfService from './ConfService'
 
-const baseUrl = 'https://localhost:44390/api/';
-var user = new Mgr()
 
 export default class ApiService {
 
-  async defineHeaderAxios () {
+  constructor () {
+    this.conf = new ConfService();
+  }
+
+  async defineAxiosDefaults () {
+    let conf = await this.conf.getConfig();
+    let user = new Mgr(conf);
+
     await user.getAcessToken().then(
-      acessToken => {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + acessToken
+      accessToken => {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
+        axios.defaults.baseURL = conf.serverUrl;
       }, err => {
         console.log(err)
-      })  
+      })
   }
 
   async getAll(api){

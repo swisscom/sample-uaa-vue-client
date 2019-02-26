@@ -10,24 +10,29 @@
 <script>
 /* eslint-disable */
 import Mgr from './services/SecurityService'
+import Conf from './services/ConfService'
 
 export default {
   name: 'App',
   data () {
     return {
-      mgr: new Mgr(),
-      signedIn: true
-    }    
+      conf: new Conf(),
+      mgr: null,
+      signedIn: false
+    }
   },
-  mounted () {
-    this.mgr.getSignedIn().then(
-      signIn => {
-        this.signedIn = signIn
-      },
-      err => {
-        console.log(err)
-      }
-    )    
+  created () {
+    this.conf.getConfig().then(config => {
+      this.mgr = new Mgr(config);
+      this.mgr.getSignedIn().then(
+        signIn => {
+          this.signedIn = signIn
+        },
+        err => {
+          console.log(err)
+        }
+      );
+    });
   }
 }
 </script>

@@ -4,8 +4,9 @@
   "description": "project vueJs with oidc-client library",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --progress --config build/webpack.config.dev.js",
-    "prod": "webpack --config build/webpack.config.prod.js",
+    "dev-serve": "webpack-dev-server --progress --config build/webpack.config.dev.js",
+    "dev": "webpack --config build/webpack.config.dev.js && cp ./start.sh ./dist",
+    "prod": "webpack --config build/webpack.config.prod.js && cp ./start.sh ./dist",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "eslint --ext .js,.vue src --fix",
     "test": "jest"

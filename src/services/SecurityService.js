@@ -124,60 +124,6 @@ export default class SecurityService {
     })
   }
 
-  // Get the profile of the user logged in
-  getProfile () {
-    let self = this
-    return new Promise((resolve, reject) => {
-      mgr.getUser().then(function (user) {
-        if (user == null) {
-          self.signIn()
-          return resolve(null)
-        } else{          
-          return resolve(user.profile)
-        }
-      }).catch(function (err) {
-        console.log(err)
-        return reject(err)
-      });
-    })
-  }
-
-  // Get the token id
-  getIdToken(){
-    let self = this
-    return new Promise((resolve, reject) => {
-      mgr.getUser().then(function (user) {
-        if (user == null) {
-          self.signIn()
-          return resolve(null)
-        } else{          
-          return resolve(user.id_token)
-        }
-      }).catch(function (err) {
-        console.log(err)
-        return reject(err)
-      });
-    })
-  }
-
-  // Get the session state
-  getSessionState(){
-    let self = this
-    return new Promise((resolve, reject) => {
-      mgr.getUser().then(function (user) {
-        if (user == null) {
-          self.signIn()
-          return resolve(null)
-        } else{          
-          return resolve(user.session_state)
-        }
-      }).catch(function (err) {
-        console.log(err)
-        return reject(err)
-      });
-    })
-  }
-
   // Get the access token of the logged in user
   getAcessToken(){
     let self = this
@@ -196,39 +142,4 @@ export default class SecurityService {
     })
   }
 
-  // Takes the scopes of the logged in user
-  getScopes(){
-    let self = this
-    return new Promise((resolve, reject) => {
-      mgr.getUser().then(function (user) {
-        if (user == null) {
-          self.signIn()
-          return resolve(null)
-        } else{          
-          return resolve(user.scopes)
-        }
-      }).catch(function (err) {
-        console.log(err)
-        return reject(err)
-      });
-    })
-  }
-
-  // Get the user roles logged in
-  getRole () {
-    let self = this
-    return new Promise((resolve, reject) => {
-      mgr.getUser().then(function (user) {
-        if (user == null) {
-          self.signIn()
-          return resolve(null)
-        } else{          
-          return resolve(user.profile.role)
-        }
-      }).catch(function (err) {
-        console.log(err)
-        return reject(err)
-      });
-    })
-  }
 }
